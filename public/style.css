@@ -2,9 +2,22 @@ html, body {
     height: 100%;
 }
 
+.loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+}
+
 .container {
     position: relative;
     top: 50%;
     transform: translateY(-100%);
     text-align: center;
+}
+
+#container {
+    display: none;
 }
