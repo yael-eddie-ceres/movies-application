@@ -1,3 +1,14 @@
+.wborder {
+    border: 1px solid #fff;
+    z-index: 999;
+}
+
+.bborder {
+    border: 1px solid #000;
+    z-index: 999;
+}
+
+
 /* basic page elements */
 
 html, body {
@@ -35,11 +46,12 @@ body{
     position: relative;
     top: 50%;
     transform: translateY(-100%);
-    text-align: center;
+    text-align: cente
 }
 
 #container {
     display: none;
+
 }
 
 /* pug stuff */
@@ -55,6 +67,9 @@ body{
     display: flex;
     margin-bottom: 2rem;
     flex-wrap: wrap;
+    min-height: 224px;
+
+    /*overflow: scroll;*/
 }
 
 .card{
