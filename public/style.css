@@ -11,6 +11,10 @@ html, body {
     margin: auto;
 }
 
+.loading {
+    height: 100%;
+}
+
 .container {
     position: relative;
     top: 50%;
