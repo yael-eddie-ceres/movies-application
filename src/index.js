@@ -95,7 +95,7 @@ getMovies().then((movies) => {
 
   // fetch movie data
   fetch('../api/movies');
-  movies.forEach(({title, rating, id}) => {
+  movies.forEach(({title, rating, id}, i) => {
     console.log(`id#${id} - ${title} - rating: ${rating}`);
     movieData += `<p>id#${id} - ${title} - rating: ${rating} - <a onClick="removeMovie(${id})">DELETE</a></p>`;
 
