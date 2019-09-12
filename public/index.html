@@ -23,7 +23,7 @@
         <!-- jumbotron -->
 
         <!-- cards -->
-        <div class="cards" id="cards">
+        <div class="cards bborder" id="cards">
             <!-- 
                 <div class="card">
                 <h3 class="card-title">Tomorrow Never Dies</h3>
@@ -44,8 +44,8 @@
 
         <!-- form -->
         <div class="form">
-            <input type="text" name="title" placeholder="Title" id="title">
-            <input type="number" name="rating" placeholder="rating" id="rating">
+            <input type="text" maxlength="19" name="title" placeholder="Title" id="title">
+            <input type="number"  min="0" max="5" name="rating" placeholder="rating" id="rating">
             <input type="button" name="submit" onclick="addMovie()" value="submit your movie!">
         </div>
         
@@ -53,7 +53,7 @@
         <div id="test">This is test data</div>
 
         <!-- random pug picture -->
-        <img src="383-3832421_worried-peeking-cutouts-pug-png%20(1).png" class="pug" alt="pug">
+        <img src="../extra/383-3832421_worried-peeking-cutouts-pug-png%20(1).png" class="pug" alt="pug">
     </div>
 
     <script src="./main.js"></script>
