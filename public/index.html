@@ -19,11 +19,116 @@
         <div class="cards"></div>
 
         <!-- form -->
+        <input type="text" name="title" placeholder="Title" id="title">
+        <input type="number" name="rating" placeholder="rating" id="rating">
+        <input type="button" name="submit" onclick="addMovie()" value="submit your movie!">
+
 
         <!-- test print data -->
         <div id="test">This is test data</div>
     </div>
 
     <script src="./main.js"></script>
+    <script>
+        const title = document.getElementById("title");
+        const rating = document.getElementById("rating");
+
+
+
+        let movieData = "";
+
+        // Updates movie list on page
+        const updateMovies = () => {
+            fetch('api/movies')
+                .then(response => response.json())
+                .then(response => {
+                    test.innerHTML = "";
+                    console.log(response)
+                    response.forEach(({title, rating, id}) => {
+                        console.log(`id#${id} - ${title} - rating: ${rating}`);
+                        movieData += `<p>id#${id} - ${title} - rating: ${rating} - <a onClick="removeMovie(${id})">DELETE</a></p>`;
+                    });
+                })
+                .then(() => test.innerHTML = movieData);
+            };
+
+
+        // Add movie to db
+        const addMovie = (name, ratingScore) => {
+
+            // If there are empty arguments, get the values from the form.
+            if (name === undefined || ratingScore === undefined) {
+                var data = JSON.stringify({
+                    "title": title.value,
+                    "rating": rating.value
+                });
+            } else {
+                var data = JSON.stringify({
+                    "title": name,
+                    "rating": rating
+                });
+            }
+
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                console.log(this.responseText);
+                }
+            });
+
+            xhr.open("POST", "http://localhost:3000/movies");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("Accept", "*/*");
+            xhr.setRequestHeader("Cache-Control", "no-cache");
+            xhr.setRequestHeader("Postman-Token", "b1af016e-fc8a-4475-ada2-f774f4d6d1b4,30cc452f-72c0-4642-9c3e-1bfffdaae4bc");
+            xhr.setRequestHeader("cache-control", "no-cache");
+
+            xhr.send(data);
+
+            // Clear page of all data before we get new data
+            test.innerHTML = "";
+            movieData = "";
+
+            // Need a way to refresh the page after click
+            setTimeout(updateMovies, 800);
+        }
+
+
+
+
+
+        // remove movie from db
+        const removeMovie = (id) => {
+            var data = null;
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                console.log(this.responseText);
+                }
+            });
+
+            xhr.open("DELETE", `http://localhost:3000/movies/${id}`);
+            xhr.setRequestHeader("Accept", "*/*");
+            xhr.setRequestHeader("Cache-Control", "no-cache");
+            xhr.setRequestHeader("Postman-Token", "61abf9cb-a691-46c2-ab19-eeb996079ae9,162c3d48-e112-450b-aaa4-9c9cbaf5687f");
+            xhr.setRequestHeader("cache-control", "no-cache");
+
+            xhr.send(data);
+
+            // Clear page of all data before we get new data
+            test.innerHTML = "";
+            movieData = "";
+
+            // Need a way to refresh the list when a item is deleted
+            setTimeout(updateMovies, 800);
+        }
+
+    </script>
 </body>
 </html>
