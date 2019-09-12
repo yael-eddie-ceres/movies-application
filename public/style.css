@@ -46,7 +46,8 @@ body{
     position: relative;
     top: 50%;
     transform: translateY(-100%);
-    text-align: cente
+    margin-top: 10em;
+    text-align: center;
 }
 
 #container {
@@ -68,8 +69,16 @@ body{
     margin-bottom: 2rem;
     flex-wrap: wrap;
     min-height: 224px;
-
+    margin-top: 10em;
     /*overflow: scroll;*/
+}
+
+.card-row {
+    display: inline-flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 1em;
 }
 
 .card{
