@@ -2,6 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
     <title>My Application</title>
     <link rel="stylesheet" href="/style.css" />
 </head>
@@ -16,23 +23,43 @@
         <!-- jumbotron -->
 
         <!-- cards -->
-        <div class="cards"></div>
+        <div class="cards" id="cards">
+            <!-- 
+                <div class="card">
+                <h3 class="card-title">Tomorrow Never Dies</h3>
+                <h2 class="card-rating">5</h2>
+                <div class="card-btns">
+                    <i onclick="editMovie()" class="fas fa-edit"></i>
+                    <i onclick="removeMovie()" class="fas fa-times-circle"></i>
+                </div>
+            </div>
+
+
+            <div class="card"><h3>movie</h3><p>this is where we rate the movies</p></div>
+            <div class="card"><h3>movie</h3><p>this is where we rate the movies</p></div>
+            <div class="card"><h3>movie</h3><p>this is where we rate the movies</p></div>
+            <div class="card"><h3>movie</h3><p>this is where we rate the movies</p></div>
+            <div class="card"><h3>movie</h3><p>this is where we rate the movies</p></div> -->
+        </div>
 
         <!-- form -->
-        <input type="text" name="title" placeholder="Title" id="title">
-        <input type="number" name="rating" placeholder="rating" id="rating">
-        <input type="button" name="submit" onclick="addMovie()" value="submit your movie!">
-
+        <div class="form">
+            <input type="text" name="title" placeholder="Title" id="title">
+            <input type="number" name="rating" placeholder="rating" id="rating">
+            <input type="button" name="submit" onclick="addMovie()" value="submit your movie!">
+        </div>
+        
         <!-- test print data -->
         <div id="test">This is test data</div>
+
+        <!-- random pug picture -->
+        <img src="383-3832421_worried-peeking-cutouts-pug-png%20(1).png" class="pug" alt="pug">
     </div>
 
     <script src="./main.js"></script>
     <script>
         const title = document.getElementById("title");
         const rating = document.getElementById("rating");
-
-
 
         let movieData = "";
 
@@ -46,9 +73,22 @@
                     response.forEach(({title, rating, id}) => {
                         console.log(`id#${id} - ${title} - rating: ${rating}`);
                         movieData += `<p>id#${id} - ${title} - rating: ${rating} - <a onClick="removeMovie(${id})">DELETE</a></p>`;
+                        
+                        // Add data to cards
+                        cardData += `<div class="card">`
+                        cardData += `<h3 class="card-title">${title}</h3>`
+                        cardData += `<h2 class="card-rating">${rating}</h2>`
+                        cardData += `<div class="card-btns">`
+                        cardData += `<i onclick="editMovie()" class="fas fa-edit"></i>`
+                        cardData += `<i onclick="removeMovie(${id})" class="fas fa-times-circle"></i>`
+                        cardData += `</div>`
+                        cardData += `</div>`
                     });
                 })
-                .then(() => test.innerHTML = movieData);
+                .then(() => {
+                    // test.innerHTML = movieData;
+                    cards.innerHTML = cardData;
+                });
             };
 
 
@@ -88,13 +128,20 @@
             xhr.send(data);
 
             // Clear page of all data before we get new data
-            test.innerHTML = "";
+            // test.innerHTML = "";
+            cards.innerHTML = "";
             movieData = "";
+            cardData = "";
 
             // Need a way to refresh the page after click
-            setTimeout(updateMovies, 800);
+            setTimeout(updateMovies, 200);
         }
 
+
+
+        const editMovie = () => {
+            console.log("You want to edit movie?");
+        };
 
 
 
@@ -122,9 +169,11 @@
 
             // Clear page of all data before we get new data
             test.innerHTML = "";
+            cards.innerHTML = "";
             movieData = "";
+            cardData = "";
 
-            // Need a way to refresh the list when a item is deleted
+            // Need a way to refresh the page after click
             setTimeout(updateMovies, 800);
         }
 

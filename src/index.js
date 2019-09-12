@@ -9,13 +9,14 @@ sayHello('World');
  */
 const {getMovies} = require('./api.js');
 
+// declare dom element variables
 const loading = document.getElementById("loading");
 const container = document.getElementById("container");
 const test = document.getElementById("test");
 
 // variable to store movie data
 let movieData = "";
-
+let cardData = "";
 
 
 
@@ -97,6 +98,18 @@ getMovies().then((movies) => {
   movies.forEach(({title, rating, id}) => {
     console.log(`id#${id} - ${title} - rating: ${rating}`);
     movieData += `<p>id#${id} - ${title} - rating: ${rating} - <a onClick="removeMovie(${id})">DELETE</a></p>`;
+
+    // Add data to cards
+    cardData += `<div class="card">`
+    cardData += `<h3 class="card-title">${title}</h3>`
+    cardData += `<h2 class="card-rating">${rating}</h2>`
+    cardData += `<div class="card-btns">`
+    cardData += `<i onclick="editMovie()" class="fas fa-edit"></i>`
+    cardData += `<i onclick="removeMovie(${id})" class="fas fa-times-circle"></i>`
+    cardData += `</div>`
+    cardData += `</div>`
+
+
   });
 }).catch((error) => {
   alert('Oh no! Something went wrong.\nCheck the console for details.')
@@ -107,5 +120,6 @@ getMovies().then((movies) => {
   container.style.display = "block";
 
   // print movie data string to page
-  test.innerHTML = movieData;
+  // test.innerHTML = movieData;
+  cards.innerHTML = cardData;
 });
