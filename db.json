@@ -1,19 +1,9 @@
 {
   "movies": [
     {
-      "title": "Casablanca",
-      "rating": "4",
-      "id": 1
-    },
-    {
-      "title": "Tomorrow Never Dies",
-      "rating": "2",
-      "id": 4
-    },
-    {
-      "title": "Casino Royal",
-      "rating": "4",
-      "id": 6
+      "title": "yales pug adventire",
+      "rating": "5",
+      "id": 7
     }
   ]
 }
