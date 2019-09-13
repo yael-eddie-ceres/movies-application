@@ -20,6 +20,10 @@
         <img src="./img/loading.gif" alt="">
     </div>
 
+    <!-- background div -->
+    <div class="bgDiv" id="bgDiv">
+
+
     <!-- page content -->
     <div class="wrapper">
 
@@ -27,14 +31,42 @@
          <div class="container" id="container">
 
             <!-- form -->
-            <div class="form">
+            <!-- <div class="form">
                 <input type="text" maxlength="19" name="title" placeholder="Title" id="title">
                 <input type="number"  min="0" max="5" name="rating" placeholder="rating" id="rating">
                 <input type="button" name="submit" onclick="addMovie()" value="submit your movie!">
-            </div>
+            </div> -->
+            
+            <div class="container__item">
+                <input 
+                  type="text" 
+                  class="form__field" 
+                  placeholder="Movie Title" 
+                  maxlength="19" 
+                  name="title" 
+                  id="title"
+                />
+                <input 
+                  type="number" 
+                  class="form__field" 
+                  placeholder="Rating" 
+                  maxlength="1"
+                  min="0"
+                  max="5"
+                  name="rating"
+                  id="rating"
+                />
+                <input 
+                  type="button" 
+                  name="submit"
+                  onclick="addMovie()"
+                  value="Add"
+                  class="btn btn--primary btn--inside uppercase"
+                />
+              </div>
 
             <!-- cards -->
-            <div class="cards bborder" id="cards">
+            <div class="cards" id="cards">
 
                 <!-- <div class="card-row">
                     <div class="card">
@@ -101,8 +133,9 @@
 <!--        <img src="./img/pug.gif" class="pug" alt="pug">-->
         </div>
         <!-- random pug picture -->
-    </div>
+    </div> <!-- Wrapper -->
 
+    </div>
 
     <script src="./main.js"></script>
     <script>
@@ -213,6 +246,12 @@
 
             // Need a way to refresh the page after click
             setTimeout(updateMovies, 200);
+
+            // Get movie poster and add to background of page
+            fetchMovie(title.value);
+            setTimeout(() => {
+                bgDiv.setAttribute("style", "background-image: url('" + users.Poster +"')")
+            }, 800);
         }
 
 
@@ -255,37 +294,41 @@
             setTimeout(updateMovies, 800);
         }
 
-        // movie poster fun fun fun
-        // const poster = document.getElementById("poster");
-        // let button = document.getElementById("btn");
-        //
-        // let users = "";
-        //
-        // let inputTitle = "";
-        //
-        // const fetchMovie = (title) => {
-        //     if (title !== undefined) {
-        //         inputTitle = document.getElementById("input").value;
-        //         fetch(`http://www.omdbapi.com/?t=${title}&apikey=db1cd656`)
-        //             .then((response) => response.json())
-        //             .then((json) => {
-        //                 users = json;
-        //                 console.log(json)
-        //             });
-        //     } else {
-        //         inputTitle = document.getElementById("input").value;
-        //         title = inputTitle;
-        //         fetch(`http://www.omdbapi.com/?t=${title}&apikey=db1cd656`)
-        //             .then((response) => response.json())
-        //             .then((json) => {
-        //                 users = json;
-        //                 console.log(json)
-        //             });
-        //     }
-        //     setTimeout(function () {
-        //         poster.src = users.Poster;
-        //     }, 800)
-        // };
+        // movie poster fun fun fun fun
+        const poster = document.getElementById("poster");
+        let button = document.getElementById("btn");
+        
+        let users = "";
+        
+        let inputTitle = "";
+        
+        // fetches movie information stores in var: users
+        const fetchMovie = (title) => {
+            if (title !== undefined) {
+                inputTitle = document.getElementById("title").value;
+                fetch(`http://www.omdbapi.com/?t=${title}&apikey=db1cd656`)
+                    .then((response) => response.json())
+                    .then((json) => {
+                        users = json;
+                        console.log(json)
+                    });
+            } else {
+                inputTitle = document.getElementById("input").value;
+                title = inputTitle;
+                fetch(`http://www.omdbapi.com/?t=${title}&apikey=db1cd656`)
+                    .then((response) => response.json())
+                    .then((json) => {
+                        users = json;
+                        console.log(json)
+                        console.log(users.Poster);
+                        setTimeout(() => {
+                            poster.src = users.Poster;
+                        }, 1200)
+                    });
+            }
+        };
+
+
     </script>
 </body>
 </html>
