@@ -89,6 +89,7 @@ const removeMovie = (id) => {
 
 
 let moviesCounter = 0;
+let movieDataRaw;
 
 // get movies function
 getMovies().then((movies) => {
