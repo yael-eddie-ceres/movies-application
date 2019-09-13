@@ -11,12 +11,14 @@
       "id": 22
     },
     {
-      "id": 23
-    },
-    {
       "title": "star wars",
       "rating": "5",
       "id": 24
+    },
+    {
+      "title": "Suicide Squad",
+      "rating": "2",
+      "id": 25
     }
   ]
 }
