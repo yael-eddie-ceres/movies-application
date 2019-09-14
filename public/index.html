@@ -56,7 +56,6 @@
                         <input 
                             type="button" 
                             name="submit"
-                            onclick="addMovie()"
                             value="Save"
                             id="saveBtn"
                             class="btn btn--primary btn--inside uppercase"
@@ -121,6 +120,7 @@
 
             // Updates movie list on page
             const updateMovies = () => {
+                console.log("updateMovie function was ran");
                 fetch('api/movies')
                     .then(response => response.json())
                     .then(response => {
@@ -178,7 +178,7 @@
 
             // Add movie to db
             const addMovie = (name, ratingScore) => {
-
+                console.log("addMovie function was ran");
                 // If there are empty arguments, get the values from the form.
                 if (name === undefined || ratingScore === undefined) {
                     var data = JSON.stringify({
@@ -241,8 +241,9 @@
 
             // Function used for editing movie
             const editUpdateMovie = (idx) => {
+                console.log("editUpdateMovie function was ran");
                 var data = JSON.stringify({
-                    "title": modalRating.title,
+                    "title": modalTitle.value,
                     "rating": modalRating.value,
                     "id": movieDataRaw[idx].id
                 });
@@ -274,6 +275,7 @@
 
             // Function for displaying movie to edit
             const editMovie = (id) => {
+                console.log("editMovie function was ran");
                 console.log("You want to edit movie " + id + " ?");
                 
                 // retrieved movie data and saved it to var: movieDataRaw
@@ -301,9 +303,11 @@
 
                 // Add event listener for save Btn
                 saveBtn.addEventListener("click", () => {
-                    editUpdateMovie(selectedIndex);
-                    setTimeout(updateMovies, 200);
+                    cards.innerHTML = "";
+                    movieData = "";
+                    cardData = "";
                     modal.style.display = "none";
+                    editUpdateMovie(selectedIndex);
                 });
             };
 
@@ -321,6 +325,7 @@
 
             // Remove movie from db
             const removeMovie = (id) => {
+                console.log("removeMovie function was ran");
                 var data = null;
 
                 var xhr = new XMLHttpRequest();
@@ -358,6 +363,7 @@
             
             // fetches movie information stores in var: users
             const fetchMovie = (title) => {
+                console.log("fetchMovie function was ran");
                 if (title !== undefined) {
                     inputTitle = document.getElementById("title").value;
                     fetch(`http://www.omdbapi.com/?t=${title}&apikey=db1cd656`)
